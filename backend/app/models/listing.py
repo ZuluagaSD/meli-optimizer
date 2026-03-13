@@ -28,9 +28,9 @@ class Listing(Base):
     quality_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
     health_status: Mapped[str | None] = mapped_column(String(20), nullable=True)
     attribute_completeness_pct: Mapped[float] = mapped_column(Float, default=0)
-    last_synced_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
-    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now())
+    last_synced_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     meli_account: Mapped["MeliAccount"] = relationship(back_populates="listings")
     optimizations: Mapped[list["Optimization"]] = relationship(

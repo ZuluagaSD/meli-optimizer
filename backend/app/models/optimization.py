@@ -21,7 +21,7 @@ class Optimization(Base):
     suggested_attributes: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     model_version: Mapped[str] = mapped_column(String(50), default="claude-sonnet-4-20250514")
     prompt_version: Mapped[str] = mapped_column(String(20), default="v1")
-    applied_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    applied_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     listing: Mapped["Listing"] = relationship(back_populates="optimizations")

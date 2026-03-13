@@ -17,10 +17,10 @@ class MeliAccount(Base):
     nickname: Mapped[str] = mapped_column(String(255), default="")
     access_token: Mapped[str] = mapped_column(String(512))
     refresh_token: Mapped[str] = mapped_column(String(512))
-    token_expires_at: Mapped[datetime] = mapped_column(DateTime)
+    token_expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
-    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now())
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     tenant: Mapped["Tenant"] = relationship(back_populates="meli_accounts")
     listings: Mapped[list["Listing"]] = relationship(back_populates="meli_account", cascade="all, delete-orphan")

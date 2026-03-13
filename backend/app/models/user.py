@@ -13,7 +13,7 @@ class Tenant(Base):
     id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     name: Mapped[str] = mapped_column(String(255))
     plan: Mapped[str] = mapped_column(String(50), default="free")
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     users: Mapped[list["User"]] = relationship(back_populates="tenant", cascade="all, delete-orphan")
     meli_accounts: Mapped[list["MeliAccount"]] = relationship(back_populates="tenant", cascade="all, delete-orphan")
@@ -29,6 +29,6 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(255))
     preferred_language: Mapped[str] = mapped_column(String(5), default="es")
     is_active: Mapped[bool] = mapped_column(default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     tenant: Mapped["Tenant"] = relationship(back_populates="users")
