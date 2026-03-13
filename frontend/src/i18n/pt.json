@@ -1,0 +1,51 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "apply": "Aplicar",
+    "delete": "Excluir",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sync": "Sincronizar",
+    "optimize": "Otimizar"
+  },
+  "auth": {
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "logout": "Sair",
+    "email": "E-mail",
+    "password": "Senha",
+    "name": "Nome"
+  },
+  "dashboard": {
+    "title": "Painel",
+    "totalListings": "Total de anúncios",
+    "activeListings": "Anúncios ativos",
+    "avgCompleteness": "Completude média",
+    "needAttention": "Precisam de atenção",
+    "connectedAccounts": "Contas conectadas",
+    "connectNew": "Conectar nova conta"
+  },
+  "listings": {
+    "title": "Anúncios",
+    "noListings": "Nenhum anúncio encontrado.",
+    "allMarkets": "Todos os mercados",
+    "allStatuses": "Todos os status",
+    "completeness": "Completude",
+    "health": "Saúde",
+    "price": "Preço"
+  },
+  "optimize": {
+    "title": "Otimização",
+    "generateTitles": "Gerar títulos otimizados",
+    "suggestAttributes": "Sugerir atributos faltantes",
+    "applyToMeli": "Aplicar no MeLi",
+    "bulkOptimize": "Otimização em massa",
+    "selectAll": "Selecionar tudo",
+    "processing": "Processando..."
+  }
+}
