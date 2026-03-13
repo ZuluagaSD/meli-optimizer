@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import ForeignKey, String, DateTime, func
+from sqlalchemy import ForeignKey, String, DateTime, Uuid, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
@@ -10,7 +10,7 @@ from app.db.database import Base
 class Tenant(Base):
     __tablename__ = "tenants"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     name: Mapped[str] = mapped_column(String(255))
     plan: Mapped[str] = mapped_column(String(50), default="free")
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
@@ -22,8 +22,8 @@ class Tenant(Base):
 class User(Base):
     __tablename__ = "users"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.id"), index=True)
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    tenant_id: Mapped[uuid.UUID] = mapped_column(Uuid, ForeignKey("tenants.id"), index=True)
     email: Mapped[str] = mapped_column(String(320), unique=True, index=True)
     password_hash: Mapped[str] = mapped_column(String(255))
     name: Mapped[str] = mapped_column(String(255))

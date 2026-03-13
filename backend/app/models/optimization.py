@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import ForeignKey, String, DateTime, Text, func, JSON
+from sqlalchemy import ForeignKey, String, DateTime, Text, Uuid, func, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
@@ -10,8 +10,8 @@ from app.db.database import Base
 class Optimization(Base):
     __tablename__ = "optimizations"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    listing_id: Mapped[str] = mapped_column(ForeignKey("listings.id"), index=True)
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    listing_id: Mapped[uuid.UUID] = mapped_column(Uuid, ForeignKey("listings.id"), index=True)
     type: Mapped[str] = mapped_column(String(20))
     status: Mapped[str] = mapped_column(String(20), default="pending")
     original_title: Mapped[str | None] = mapped_column(String(255), nullable=True)

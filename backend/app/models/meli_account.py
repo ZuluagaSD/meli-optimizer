@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import ForeignKey, String, DateTime, BigInteger, Boolean, func
+from sqlalchemy import ForeignKey, String, DateTime, BigInteger, Boolean, Uuid, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
@@ -10,8 +10,8 @@ from app.db.database import Base
 class MeliAccount(Base):
     __tablename__ = "meli_accounts"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.id"), index=True)
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    tenant_id: Mapped[uuid.UUID] = mapped_column(Uuid, ForeignKey("tenants.id"), index=True)
     meli_user_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True)
     site_id: Mapped[str] = mapped_column(String(5))
     nickname: Mapped[str] = mapped_column(String(255), default="")

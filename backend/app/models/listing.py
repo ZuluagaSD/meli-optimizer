@@ -2,7 +2,7 @@ import uuid
 import json
 from datetime import datetime
 
-from sqlalchemy import ForeignKey, String, DateTime, Float, Integer, func, Text, JSON
+from sqlalchemy import ForeignKey, String, DateTime, Float, Integer, Uuid, func, Text, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
@@ -11,8 +11,8 @@ from app.db.database import Base
 class Listing(Base):
     __tablename__ = "listings"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    meli_account_id: Mapped[str] = mapped_column(ForeignKey("meli_accounts.id"), index=True)
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    meli_account_id: Mapped[uuid.UUID] = mapped_column(Uuid, ForeignKey("meli_accounts.id"), index=True)
     meli_item_id: Mapped[str] = mapped_column(String(20), unique=True, index=True)
     site_id: Mapped[str] = mapped_column(String(5), index=True)
     title: Mapped[str] = mapped_column(String(255))
