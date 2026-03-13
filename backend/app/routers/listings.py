@@ -221,11 +221,14 @@ async def get_competitors(
     account = await db.get(MeliAccount, listing.meli_account_id)
     client = MeliClient(db, account)
 
-    competitors = await client.search_items(
-        query=listing.title[:60],
-        category_id=listing.category_id or None,
-        limit=5,
-    )
+    try:
+        competitors = await client.search_items(
+            query=listing.title[:60],
+            category_id=listing.category_id or None,
+            limit=5,
+        )
+    except Exception:
+        return []
 
     return [
         CompetitorResponse(
