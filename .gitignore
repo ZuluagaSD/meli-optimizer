@@ -22,6 +22,9 @@ out/
 # Docker
 docker-compose.override.yml
 
+# Supabase local
+supabase/.temp
+
 # OS
 .DS_Store
 Thumbs.db
